@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var totalView: UIView!
     var alertView: AlertView!
-    var realm = try! Realm()
+    
     
     private lazy var expenseAlertView: ExpenseAlertView = {
         let expenseAlertView: ExpenseAlertView = ExpenseAlertView.loadFromNib()
@@ -54,6 +54,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.setupBackgroundImage()
+        let realm = try! Realm()
         accountsRealm = realm.objects(Account.self)
         
         for item in accountsRealm{
@@ -117,6 +118,10 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
        self.tabBarController?.tabBar.isHidden = false
+        legendTableView.reloadData()
+        updateData()
+        updateCharData()
+        setSumLbl()
         
     }
     
@@ -378,8 +383,9 @@ extension ViewController: AlertDelegate {
             account.title = alertView.firstLblTF.text!
             accountsData.accounts.append(account)
             
-            try! self.realm.write {
-                self.realm.add(account)
+            let realm = try! Realm()
+            try! realm.write {
+                realm.add(account)
             }
             
 //            saveInRealm()
@@ -404,8 +410,9 @@ extension ViewController: AlertDelegate {
             account.title = alertView.firstLblTF.text!
             accountsData.accounts.append(account)
             
-            try! self.realm.write {
-                self.realm.add(account)
+            let realm = try! Realm()
+            try! realm.write {
+                realm.add(account)
             }
             
 //            saveInRealm()
@@ -425,6 +432,7 @@ extension ViewController: AlertDelegate {
             return false
         }) == true  {
             
+            let realm = try! Realm()
             var accountsInRealm: Results<Account>!
             accountsInRealm = realm.objects(Account.self)
             
@@ -537,7 +545,7 @@ extension ViewController: ExpenseAlertDelegate {
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrayOfDataForChart.count
+        return accountsData.accounts.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

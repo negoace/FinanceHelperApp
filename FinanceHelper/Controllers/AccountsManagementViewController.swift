@@ -32,12 +32,15 @@ class AccountsManagementViewController: UIViewController {
     
     var realm = try! Realm()
     
+    var accountsInRealm: Results<Account>!
+    
     //var accounts: [Account] = AccountsData.shared.accounts
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
         
+        accountsInRealm = realm.objects(Account.self)
         
         // Do any additional setup after loading the view.
         self.navigationController?.navigationBar.barTintColor = .clear
@@ -187,20 +190,25 @@ extension AccountsManagementViewController: UITableViewDelegate, UITableViewData
         return indexPath
     }
     
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//        
-//        let account = accountsData.accounts[indexPath.row]
-//        
-//        if editingStyle == .delete {
-////            try! realm.write {
-////                self.realm.delete(account)
-////            }
-//            self.accountsData.accounts.remove(at: indexPath.row)
-//            tableView.deleteRows(at: [indexPath], with: .fade)
-//            
-//            
-//        }
-//    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        
+        
+        if editingStyle == .delete {
+            let account = accountsInRealm[indexPath.row]
+            
+            let realm = try! Realm()
+            try! realm.write {
+                realm.delete(account)
+                self.tableView.reloadData()
+            }
+            
+            self.accountsData.accounts.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            
+        }
+    }
     
 //    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
 //        let deleteAction = UITableViewRowAction(style: .default, title: "") { (_, _) in
