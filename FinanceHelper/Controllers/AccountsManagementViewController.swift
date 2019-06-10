@@ -192,8 +192,6 @@ extension AccountsManagementViewController: UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
-        
-        
         if editingStyle == .delete {
             let account = accountsInRealm[indexPath.row]
             

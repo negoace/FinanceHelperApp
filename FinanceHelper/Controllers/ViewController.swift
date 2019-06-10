@@ -118,9 +118,10 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
        self.tabBarController?.tabBar.isHidden = false
-        legendTableView.reloadData()
+        
         updateData()
         updateCharData()
+        legendTableView.reloadData()
         setSumLbl()
         
     }
@@ -435,14 +436,16 @@ extension ViewController: AlertDelegate {
             let realm = try! Realm()
             var accountsInRealm: Results<Account>!
             accountsInRealm = realm.objects(Account.self)
+            try! realm.write {
+                for item in accountsInRealm{
+                    if item.title == alertView.firstLblTF.text!{
+                        item.amountOfMoney += Float(alertView.secondLblTF.text!) ?? 0
+                        realm.add(item)
+                    }
+                }
+            }
             
-//            try! realm.write {
-//                for item in accountsInRealm{
-//                    if item.title == alertView.firstLblTF.text!{
-//                        item.amountOfMoney += Float(alertView.secondLblTF.text!) ?? 0
-//                    }
-//                }
-//            }
+           
             
             
             for item in accountsData.accounts{
@@ -494,6 +497,8 @@ extension ViewController: ExpenseAlertDelegate {
             }
             return false
         }) == true && expenseAlertView.secondLblTF.text != nil && expenseAlertView.secondLblTF.text != "" && expenseAlertView.firstLblTF.text != "" && expenseAlertView.firstLblTF.text != nil && expenseAlertView.thirdLblTF.text != "" && expenseAlertView.thirdLblTF.text != nil{
+            
+            
             for item in accountsData.accounts{
                 if item.title == expenseAlertView.firstLblTF.text!{
                     item.amountOfMoney -= Float(expenseAlertView.thirdLblTF.text!) ?? 0
