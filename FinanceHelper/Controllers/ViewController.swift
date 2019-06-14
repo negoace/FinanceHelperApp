@@ -109,7 +109,7 @@ class ViewController: UIViewController {
     
 //    override func viewDidDisappear(_ animated: Bool) {
 //        super.viewDidDisappear(true)
-//        
+//
 //        try! self.realm.write {
 //            self.realm.deleteAll()
 //        }
@@ -119,11 +119,22 @@ class ViewController: UIViewController {
         super.viewWillAppear(true)
        self.tabBarController?.tabBar.isHidden = false
         
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
         updateData()
         updateCharData()
         legendTableView.reloadData()
         setSumLbl()
         
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
 //    @objc func onTableCellDeleted(_ notification: NSNotification){
@@ -445,17 +456,12 @@ extension ViewController: AlertDelegate {
                         realm.add(item)
                     }
                 }
-            }
-            
-           
-            
-            
-            for item in accountsData.accounts{
-                if item.title == alertView.firstLblTF.text!{
-                    item.amountOfMoney += Float(alertView.secondLblTF.text!) ?? 0
+                for item in accountsData.accounts{
+                    if item.title == alertView.firstLblTF.text!{
+                        item.amountOfMoney += Float(alertView.secondLblTF.text!) ?? 0
+                    }
                 }
             }
-            
             
             
 //            saveInRealm()
@@ -500,12 +506,23 @@ extension ViewController: ExpenseAlertDelegate {
             return false
         }) == true && expenseAlertView.secondLblTF.text != nil && expenseAlertView.secondLblTF.text != "" && expenseAlertView.firstLblTF.text != "" && expenseAlertView.firstLblTF.text != nil && expenseAlertView.thirdLblTF.text != "" && expenseAlertView.thirdLblTF.text != nil{
             
-            
-            for item in accountsData.accounts{
-                if item.title == expenseAlertView.firstLblTF.text!{
-                    item.amountOfMoney -= Float(expenseAlertView.thirdLblTF.text!) ?? 0
+            let realm = try! Realm()
+            var accountsInRealm: Results<Account>!
+            accountsInRealm = realm.objects(Account.self)
+            try! realm.write {
+                for item in accountsInRealm{
+                    if item.title == alertView.firstLblTF.text!{
+                        item.amountOfMoney -= Float(expenseAlertView.thirdLblTF.text!) ?? 0
+                        realm.add(item)
+                    }
+                }
+                for item in accountsData.accounts{
+                    if item.title == expenseAlertView.firstLblTF.text!{
+                        item.amountOfMoney -= Float(expenseAlertView.thirdLblTF.text!) ?? 0
+                    }
                 }
             }
+            
             
             expenseAlertView.removeFromSuperview()
             visualEffectView.removeFromSuperview()
