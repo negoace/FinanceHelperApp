@@ -151,10 +151,12 @@ class ViewController: UIViewController {
     
     
     func updateData(){
-        if accountsData.accounts.isEmpty == false{
+        arrayOfDataForChart.removeAll()
+        
+        if !accountsData.accounts.isEmpty {
             for index in 0...accountsData.accounts.count - 1 {
-            
-                for item in arrayOfDataForChart{
+                
+                for item in arrayOfDataForChart {
                     if item.label == accountsData.accounts[index].title {
                         arrayOfDataForChart.remove(at: arrayOfDataForChart.firstIndex(of: item)!)
                     }
