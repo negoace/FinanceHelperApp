@@ -150,13 +150,18 @@ class ViewController: UIViewController {
     @objc func keyboardWillShow(_ notification: NSNotification){
         guard let userInfo = notification.userInfo else {return}
         let kbFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        alertView.frame.origin.y = 0
+        expenseAlertView.frame.origin.y = 0
+        
         alertView.frame.origin.y -= kbFrame.size.height / 5
         expenseAlertView.frame.origin.y -= kbFrame.size.height / 5
+        //view.frame.origin.y -= kbFrame.size.height / 5
     }
     
     @objc func keyboardWillHide(_ notification: NSNotification) {
         alertView.frame.origin.y = 0
         expenseAlertView.frame.origin.y = 0
+       // view.frame.origin.y = 0
     }
     
     
