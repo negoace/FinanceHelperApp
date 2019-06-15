@@ -153,8 +153,8 @@ class ViewController: UIViewController {
         alertView.frame.origin.y = 0
         expenseAlertView.frame.origin.y = 0
         
-        alertView.frame.origin.y -= kbFrame.size.height / 5
-        expenseAlertView.frame.origin.y -= kbFrame.size.height / 5
+        alertView.frame.origin.y -= kbFrame.size.height / 3
+        expenseAlertView.frame.origin.y -= kbFrame.size.height / 3
         //view.frame.origin.y -= kbFrame.size.height / 5
     }
     
