@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var pieChartView: PieChartView!
     
     @IBOutlet weak var totalView: UIView!
-    var alertView: AlertView!
+    private var alertView: AlertView!
     
     
     private lazy var expenseAlertView: ExpenseAlertView = {
@@ -150,6 +150,12 @@ class ViewController: UIViewController {
     @objc func keyboardWillShow(_ notification: NSNotification){
         guard let userInfo = notification.userInfo else {return}
         let kbFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        guard let alertView = alertView else {
+            expenseAlertView.frame.origin.y = 0
+            expenseAlertView.frame.origin.y -= kbFrame.size.height / 3
+            return
+            
+        }
         alertView.frame.origin.y = 0
         expenseAlertView.frame.origin.y = 0
         
@@ -159,6 +165,10 @@ class ViewController: UIViewController {
     }
     
     @objc func keyboardWillHide(_ notification: NSNotification) {
+        guard let alertView = alertView else {
+            expenseAlertView.frame.origin.y = 0
+            return
+        }
         alertView.frame.origin.y = 0
         expenseAlertView.frame.origin.y = 0
        // view.frame.origin.y = 0
