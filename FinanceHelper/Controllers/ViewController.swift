@@ -44,8 +44,6 @@ class ViewController: UIViewController {
     
     var accountsData = AccountsData.shared
     
-   // var accounts: [Account] = AccountsData.shared.accounts
-    
     var accountsRealm: Results<Account>!
     
     
@@ -93,7 +91,6 @@ class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         
-       // NotificationCenter.default.addObserver(self, selector: #selector(onTableCellDeleted(_:)), name: NSNotification.Name(rawValue: "Table cell deleted"), object: nil)
         
         // Chart Configuration
         pieChartView.chartDescription?.text = ""
@@ -107,13 +104,16 @@ class ViewController: UIViewController {
         updateCharData()
     }
     
-//    override func viewDidDisappear(_ animated: Bool) {
-//        super.viewDidDisappear(true)
-//
-//        try! self.realm.write {
-//            self.realm.deleteAll()
-//        }
-//    }
+    // Uncomment this to delete all saved data in Realm
+/*
+     override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+
+        try! self.realm.write {
+            self.realm.deleteAll()
+        }
+    }
+*/
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -137,13 +137,6 @@ class ViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-//    @objc func onTableCellDeleted(_ notification: NSNotification){
-//        print("table cell deleted")
-//        print(accountsData.accounts)
-//        updateData()
-//        updateCharData()
-//        legendTableView.reloadData()
-//    }
     
     
     // Selectors for kb notifications
@@ -161,7 +154,6 @@ class ViewController: UIViewController {
         
         alertView.frame.origin.y -= kbFrame.size.height / 3
         expenseAlertView.frame.origin.y -= kbFrame.size.height / 3
-        //view.frame.origin.y -= kbFrame.size.height / 5
     }
     
     @objc func keyboardWillHide(_ notification: NSNotification) {
@@ -171,7 +163,6 @@ class ViewController: UIViewController {
         }
         alertView.frame.origin.y = 0
         expenseAlertView.frame.origin.y = 0
-       // view.frame.origin.y = 0
     }
     
     
@@ -387,73 +378,56 @@ class ViewController: UIViewController {
 
 extension ViewController: AlertDelegate {
     
-//    func saveInRealm() {
-//        let account = AccountRealm()
-//        guard let title = alertView.firstLblTF.text else {return}
-//        let amountOfMoney = Float(alertView.secondLblTF.text!) ?? 0
-//
-//        account.amountOfMoney = amountOfMoney
-//        account.title = title
-//
-//
-//        try! self.realm.write {
-//            self.realm.add(account)
-//            print("saved in realm")
-//        }
-//    }
+    private func saveAccountInRealm(account: Account) {
+        let realm = try! Realm()
+        try! realm.write {
+            realm.add(account)
+        }
+    }
     
+    private func removeAlertView(){
+        alertView.removeFromSuperview()
+        visualEffectView.removeFromSuperview()
+        updateData()
+        updateCharData()
+        addAnimatedOut()
+        alertView.firstLblTF.text = ""
+        alertView.secondLblTF.text = ""
+        alertView.firstLblTF.placeholder = nil
+        alertView.secondLblTF.placeholder = nil
+    }
     
-    func addBtnPressed() {
-        
-        if accountsData.accounts.isEmpty && alertView.firstLblTF.text != nil && alertView.firstLblTF.text != "" && alertView.secondLblTF.text != nil && alertView.secondLblTF.text != ""{
-//            accountsData.accounts.append(Account(title: alertView.firstLblTF.text!, currency: "Usd", amountOfMoney: Float(alertView.secondLblTF.text!) ?? 0))
+    private func alertViewAddBtnAction(){
+        if accountsData.accounts.isEmpty &&
+            alertView.firstLblTF.text != nil &&
+            alertView.firstLblTF.text != "" &&
+            alertView.secondLblTF.text != nil &&
+            alertView.secondLblTF.text != ""{
             let account = Account()
             account.amountOfMoney = Float(alertView.secondLblTF.text!) ?? 0
             account.title = alertView.firstLblTF.text!
             accountsData.accounts.append(account)
             
-            let realm = try! Realm()
-            try! realm.write {
-                realm.add(account)
-            }
+            saveAccountInRealm(account: account)
+            removeAlertView()
             
-//            saveInRealm()
-            alertView.removeFromSuperview()
-            visualEffectView.removeFromSuperview()
-            updateData()
-            updateCharData()
-            addAnimatedOut()
-            alertView.firstLblTF.text = ""
-            alertView.secondLblTF.text = ""
-            alertView.firstLblTF.placeholder = nil
-            alertView.secondLblTF.placeholder = nil
-        } else if alertView.firstLblTF.text != nil && alertView.firstLblTF.text != "" && alertView.secondLblTF.text != nil && alertView.secondLblTF.text != "" && accountsData.accounts.contains(where: { (item) -> Bool in
-            if item.title == alertView.firstLblTF.text! {
-                return true
-            }
-            return false
-        }) == false {
-//            accountsData.accounts.append(Account(title: alertView.firstLblTF.text!, currency: "Usd", amountOfMoney: Float(alertView.secondLblTF.text!) ?? 0))
+        } else if alertView.firstLblTF.text != nil &&
+            alertView.firstLblTF.text != "" &&
+            alertView.secondLblTF.text != nil &&
+            alertView.secondLblTF.text != "" &&
+            accountsData.accounts.contains(where: { (item) -> Bool in
+                if item.title == alertView.firstLblTF.text! {
+                    return true
+                }
+                return false
+            }) == false {
             let account = Account()
             account.amountOfMoney = Float(alertView.secondLblTF.text!) ?? 0
             account.title = alertView.firstLblTF.text!
             accountsData.accounts.append(account)
             
-            let realm = try! Realm()
-            try! realm.write {
-                realm.add(account)
-            }
-            
-//            saveInRealm()
-            alertView.removeFromSuperview()
-            visualEffectView.removeFromSuperview()
-            updateData()
-            updateCharData()
-            addAnimatedOut()
-            alertView.firstLblTF.text = ""
-            alertView.secondLblTF.text = ""
-            alertView.firstLblTF.placeholder = nil
-            alertView.secondLblTF.placeholder = nil
+            saveAccountInRealm(account: account)
+            removeAlertView()
         } else if accountsData.accounts.contains(where: { (item) -> Bool in
             if item.title == alertView.firstLblTF.text!{
                 return true
@@ -477,18 +451,7 @@ extension ViewController: AlertDelegate {
                     }
                 }
             }
-            
-            
-//            saveInRealm()
-            alertView.removeFromSuperview()
-            visualEffectView.removeFromSuperview()
-            updateData()
-            updateCharData()
-            addAnimatedOut()
-            alertView.firstLblTF.text = ""
-            alertView.secondLblTF.text = ""
-            alertView.firstLblTF.placeholder = nil
-            alertView.secondLblTF.placeholder = nil
+            removeAlertView()
         } else {
             alertView.firstLblTF.placeholder = "Can not be empty"
             alertView.secondLblTF.placeholder = "Can not be empty"
@@ -498,28 +461,56 @@ extension ViewController: AlertDelegate {
         setSumLbl()
     }
     
-    func cancelBtnPressed() {
+    func addBtnPressed() {
+        alertViewAddBtnAction()
+    }
+    
+    private func cancelBtnAction(){
         alertView.removeFromSuperview()
         visualEffectView.removeFromSuperview()
         alertView.firstLblTF.text = ""
         alertView.secondLblTF.text = ""
         alertView.firstLblTF.placeholder = nil
         alertView.secondLblTF.placeholder = nil
-       
+        
         cancelAnimatedOut()
+    }
+    
+    func cancelBtnPressed() {
+        cancelBtnAction()
     }
     
     
 }
 
 extension ViewController: ExpenseAlertDelegate {
-    func addBtnTapped(){
+    
+    private func removeExpenseAlertView(){
+        expenseAlertView.removeFromSuperview()
+        visualEffectView.removeFromSuperview()
+        updateData()
+        updateCharData()
+        addExpenseAnimatedOut()
+        expenseAlertView.firstLblTF.text = ""
+        expenseAlertView.secondLblTF.text = ""
+        expenseAlertView.thirdLblTF.text = ""
+        expenseAlertView.firstLblTF.placeholder = nil
+        expenseAlertView.secondLblTF.placeholder = nil
+    }
+    
+    private func expenseAlertViewAddBtnAction(){
         if accountsData.accounts.contains(where: { (item) -> Bool in
             if item.title == expenseAlertView.firstLblTF.text!{
                 return true
             }
             return false
-        }) == true && expenseAlertView.secondLblTF.text != nil && expenseAlertView.secondLblTF.text != "" && expenseAlertView.firstLblTF.text != "" && expenseAlertView.firstLblTF.text != nil && expenseAlertView.thirdLblTF.text != "" && expenseAlertView.thirdLblTF.text != nil{
+        }) == true &&
+            expenseAlertView.secondLblTF.text != nil &&
+            expenseAlertView.secondLblTF.text != "" &&
+            expenseAlertView.firstLblTF.text != "" &&
+            expenseAlertView.firstLblTF.text != nil &&
+            expenseAlertView.thirdLblTF.text != "" &&
+            expenseAlertView.thirdLblTF.text != nil{
             
             let realm = try! Realm()
             var accountsInRealm: Results<Account>!
@@ -538,17 +529,8 @@ extension ViewController: ExpenseAlertDelegate {
                 }
             }
             
+            removeExpenseAlertView()
             
-            expenseAlertView.removeFromSuperview()
-            visualEffectView.removeFromSuperview()
-            updateData()
-            updateCharData()
-            addExpenseAnimatedOut()
-            expenseAlertView.firstLblTF.text = ""
-            expenseAlertView.secondLblTF.text = ""
-            expenseAlertView.thirdLblTF.text = ""
-            expenseAlertView.firstLblTF.placeholder = nil
-            expenseAlertView.secondLblTF.placeholder = nil
         } else if accountsData.accounts.contains(where: { (item) -> Bool in
             if item.title == expenseAlertView.firstLblTF.text!{
                 return true
@@ -568,7 +550,11 @@ extension ViewController: ExpenseAlertDelegate {
         setSumLbl()
     }
     
-    func cancelBtnTapped(){
+    func addBtnTapped(){
+        expenseAlertViewAddBtnAction()
+    }
+    
+    private func expenseAlertViewCancelBtnAction(){
         expenseAlertView.firstLblTF.text = ""
         expenseAlertView.secondLblTF.text = ""
         expenseAlertView.thirdLblTF.text = ""
@@ -579,12 +565,19 @@ extension ViewController: ExpenseAlertDelegate {
         visualEffectView.removeFromSuperview()
         cancelExpenseAnimatedOut()
     }
+    func cancelBtnTapped(){
+        expenseAlertViewCancelBtnAction()
+    }
 }
 
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return accountsData.accounts.count
+        if accountsData.accounts.count < 5{
+            return accountsData.accounts.count
+        } else {
+            return 4
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -595,7 +588,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         cell.nameOfAccountLbl.textColor = #colorLiteral(red: 0.7843137255, green: 0.7843137255, blue: 0.7843137255, alpha: 1)
         cell.valueOfAccountLbl.text = String(accountsData.accounts[indexPath.row].amountOfMoney)
         cell.valueOfAccountLbl.textColor = #colorLiteral(red: 0.7843137255, green: 0.7843137255, blue: 0.7843137255, alpha: 1)
-
+        
         return cell
     }
 

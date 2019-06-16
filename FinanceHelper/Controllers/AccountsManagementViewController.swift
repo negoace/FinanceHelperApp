@@ -34,7 +34,6 @@ class AccountsManagementViewController: UIViewController {
     
     var accountsInRealm: Results<Account>!
     
-    //var accounts: [Account] = AccountsData.shared.accounts
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -209,26 +208,6 @@ extension AccountsManagementViewController: UITableViewDelegate, UITableViewData
         }
     }
     
-//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-//        let deleteAction = UITableViewRowAction(style: .default, title: "") { (_, _) in
-//            self.accountsData.accounts.remove(at: indexPath.row)
-//            tableView.deleteRows(at: [indexPath], with: .fade)
-//        }
-//        deleteAction.backgroundColor = UIColor(patternImage: UIImage(named: "Bin")!)
-//
-//        return [deleteAction]
-//    }
-    
-//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//        let deleteAction = UIContextualAction(style: .destructive, title: "") { (_, _, _) in
-//            self.accountsData.accounts.remove(at: indexPath.row)
-//            tableView.reloadData()
-//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Table cell deleted"), object: nil)
-//        }
-//
-//        deleteAction.image = UIImage(named: "Bin")
-//        return UISwipeActionsConfiguration(actions: [deleteAction])
-//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "AccountSettingsTableViewController"{
