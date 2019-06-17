@@ -12,17 +12,46 @@ class IncomeStatisticsViewController: UIViewController {
 
     @IBOutlet weak var statisticsTableView: UITableView!
     
-    var historyArray: [IncomeHistory] = []
+    var historyArray: List<IncomeHistory>!
+    var historyArray2: [IncomeHistory] = []
     var incomeHistorySingleton = IncomeHistory.shared
     var account = ""
+    var incomeStatisticDict: Results<IncomeStatisticDict>!
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let realm = try! Realm()
+        incomeStatisticDict = realm.objects(IncomeStatisticDict.self)
+//        var valu = incomeStatisticDict[0].value
+//
+//        var keys: [String] = []
+//        var values: [[IncomeHistory]] = []
+//        var valuesArray: [Any] = []
+        var dict: [String:List<IncomeHistory>] = [:]
+        //values.append(incomeStatisticDict!.value)
+        for item in incomeStatisticDict{
+            dict[item.key] = item.value
+        }
+        //values.append(valuesArray as! [IncomeHistory])
+
+//        for index in 0...incomeStatisticDict.count - 1{
+//            for
+//        }
+        print(incomeStatisticDict.count)
+//        values.append(valuesArray)
         
+
+//        var newDict = Dictionary(uniqueKeysWithValues: zip(keys, values))
+//        print(newDict)
         setupStatisticsTableView()
         self.setupBackgroundImage()
-      
-       historyArray = incomeHistorySingleton.historyDict[account]!
+        
+        historyArray = dict[account]
+        //historyArray = incomeHistorySingleton.historyDict[account]!
+        
+        for item in historyArray{
+            historyArray2.append(item)
+        }
         
         
     }
@@ -53,7 +82,7 @@ class IncomeStatisticsViewController: UIViewController {
 
 extension IncomeStatisticsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return historyArray.count
+        return historyArray2.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

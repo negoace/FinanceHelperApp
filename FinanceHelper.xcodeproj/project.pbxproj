@@ -27,6 +27,7 @@
 		A12CFF8B22B76BA400594999 /* IncomeStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12CFF8A22B76BA400594999 /* IncomeStatisticsViewController.swift */; };
 		A12CFF8D22B77CE200594999 /* IncomeStisticsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12CFF8C22B77CE200594999 /* IncomeStisticsTableViewCell.swift */; };
 		A12CFF8F22B77FE400594999 /* IncomeHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12CFF8E22B77FE400594999 /* IncomeHistory.swift */; };
+		A12CFF9322B7AD1700594999 /* IncomeStatisticDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12CFF9222B7AD1700594999 /* IncomeStatisticDict.swift */; };
 		A1612B3D2289E2CC00ADE616 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1612B3C2289E2CC00ADE616 /* SettingsTableViewController.swift */; };
 		A19A4E4322A53AB400E4D5F6 /* ExchangeRatesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19A4E4222A53AB400E4D5F6 /* ExchangeRatesTableViewController.swift */; };
 		A19A4E4722A5411B00E4D5F6 /* ExchangeRates.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19A4E4622A5411B00E4D5F6 /* ExchangeRates.swift */; };
@@ -71,6 +72,7 @@
 		A12CFF8A22B76BA400594999 /* IncomeStatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeStatisticsViewController.swift; sourceTree = "<group>"; };
 		A12CFF8C22B77CE200594999 /* IncomeStisticsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeStisticsTableViewCell.swift; sourceTree = "<group>"; };
 		A12CFF8E22B77FE400594999 /* IncomeHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeHistory.swift; sourceTree = "<group>"; };
+		A12CFF9222B7AD1700594999 /* IncomeStatisticDict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeStatisticDict.swift; sourceTree = "<group>"; };
 		A1612B3C2289E2CC00ADE616 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		A19A4E4222A53AB400E4D5F6 /* ExchangeRatesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesTableViewController.swift; sourceTree = "<group>"; };
 		A19A4E4622A5411B00E4D5F6 /* ExchangeRates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRates.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				A10E15BA22844980001D2E72 /* AccountsData.swift */,
 				A19A4E4622A5411B00E4D5F6 /* ExchangeRates.swift */,
 				A12CFF8E22B77FE400594999 /* IncomeHistory.swift */,
+				A12CFF9222B7AD1700594999 /* IncomeStatisticDict.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 				A11FADC8227B0AA800D63006 /* LegendTableViewCell.swift in Sources */,
 				A11FAD77226F784A00D63006 /* AccountsManagementViewController.swift in Sources */,
 				A10E15BB22844980001D2E72 /* AccountsData.swift in Sources */,
+				A12CFF9322B7AD1700594999 /* IncomeStatisticDict.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

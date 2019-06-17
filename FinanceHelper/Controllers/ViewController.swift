@@ -108,9 +108,9 @@ class ViewController: UIViewController {
 /*
      override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
-
-        try! self.realm.write {
-            self.realm.deleteAll()
+        let realm = try! Realm()
+        try! realm.write {
+            realm.deleteAll()
         }
     }
 */
@@ -500,6 +500,13 @@ extension ViewController: AlertDelegate {
 //            history.historyArray.append(history)
             account.accountIncomeHistory.append(history)
             //            let array = [history]
+            let incomeStatisticDict = IncomeStatisticDict()
+            incomeStatisticDict.key = alertView.firstLblTF.text!
+            incomeStatisticDict.value.append(history)
+            let realm = try! Realm()
+            try! realm.write {
+                realm.add(incomeStatisticDict)
+            }
             historySingleton.historyDict[alertView.firstLblTF.text!] = account.accountIncomeHistory
             print(historySingleton.historyDict)
             saveAccountInRealm(account: account)
@@ -532,6 +539,13 @@ extension ViewController: AlertDelegate {
 //            history.historyArray.append(history)
             account.accountIncomeHistory.append(history)
             //            let array = [history]
+            let incomeStatisticDict = IncomeStatisticDict()
+            incomeStatisticDict.key = alertView.firstLblTF.text!
+            incomeStatisticDict.value.append(history)
+            let realm = try! Realm()
+            try! realm.write {
+                realm.add(incomeStatisticDict)
+            }
             historySingleton.historyDict[alertView.firstLblTF.text!] = account.accountIncomeHistory
             print(historySingleton.historyDict)
             saveAccountInRealm(account: account)
@@ -550,6 +564,7 @@ extension ViewController: AlertDelegate {
                 for item in accountsInRealm{
                     if item.title == alertView.firstLblTF.text!{
                         item.amountOfMoney += Float(alertView.secondLblTF.text!) ?? 0
+                        
                         realm.add(item)
                     }
                 }
@@ -568,12 +583,28 @@ extension ViewController: AlertDelegate {
             history.sum = alertView.secondLblTF.text!
             let historySingleton = IncomeHistory.shared
 //            history.historyArray.append(history)
+            let dict: Results<IncomeStatisticDict>!
+            dict = realm.objects(IncomeStatisticDict.self)
+            
+            try! realm.write {
+                for item in dict{
+                    if item.key == alertView.firstLblTF.text!{
+                        item.value.append(history)
+                        realm.add(item)
+                    }
+                }
+            }
+            
+            
+            
             for item in accountsData.accounts{
                 if item.title == alertView.firstLblTF.text!{
                     item.accountIncomeHistory.append(history)
                     historySingleton.historyDict[alertView.firstLblTF.text!] = item.accountIncomeHistory
                 }
             }
+            
+            
             //            let array = [history]
             
             print(historySingleton.historyDict)

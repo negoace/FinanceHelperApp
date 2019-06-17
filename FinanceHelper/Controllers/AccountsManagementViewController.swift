@@ -33,6 +33,7 @@ class AccountsManagementViewController: UIViewController {
     var realm = try! Realm()
     
     var accountsInRealm: Results<Account>!
+    var incomeHistoryDict: Results<IncomeStatisticDict>!
     
     
     override func viewDidLoad() {
@@ -40,7 +41,7 @@ class AccountsManagementViewController: UIViewController {
         setupTableView()
         
         accountsInRealm = realm.objects(Account.self)
-        
+        incomeHistoryDict = realm.objects(IncomeStatisticDict.self)
         // Do any additional setup after loading the view.
         self.navigationController?.navigationBar.barTintColor = .clear
         self.navigationItem.title = "Your Accounts"
@@ -194,10 +195,11 @@ extension AccountsManagementViewController: UITableViewDelegate, UITableViewData
         
         if editingStyle == .delete {
             let account = accountsInRealm[indexPath.row]
-            
+            let history = incomeHistoryDict[indexPath.row]
             let realm = try! Realm()
             try! realm.write {
                 realm.delete(account)
+                realm.delete(history)
                 self.tableView.reloadData()
             }
             
