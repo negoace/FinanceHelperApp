@@ -407,10 +407,10 @@
             </objects>
             <point key="canvasLocation" x="2756" y="-295"/>
         </scene>
-        <!--Account Settings Table View Controller-->
+        <!-- -->
         <scene sceneID="FHc-fn-caG">
             <objects>
-                <tableViewController storyboardIdentifier="AccountSettingsTableViewController" id="VEk-Mo-clZ" customClass="AccountSettingsTableViewController" customModule="FinanceHelper" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="AccountSettingsTableViewController" title=" " id="VEk-Mo-clZ" customClass="AccountSettingsTableViewController" customModule="FinanceHelper" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="KKP-5m-hcC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -470,6 +470,9 @@
                                                 <constraint firstAttribute="trailing" secondItem="RyV-IQ-Cpm" secondAttribute="trailing" constant="10" id="ZtM-3A-gmq"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="6Sr-m5-lh6" kind="show" identifier="IncomeStatisticsViewController" id="C94-je-gZK"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="X20-OQ-Cce">
                                         <rect key="frame" x="0.0" y="88" width="375" height="44"/>
@@ -519,6 +522,73 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R7T-Le-Z9m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3715" y="-294"/>
+        </scene>
+        <!--Income Statistics View Controller-->
+        <scene sceneID="SF7-yF-A9J">
+            <objects>
+                <viewController storyboardIdentifier="IncomeStatisticsViewController" id="6Sr-m5-lh6" customClass="IncomeStatisticsViewController" customModule="FinanceHelper" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JeJ-jC-xN7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZT3-qj-edk">
+                                <rect key="frame" x="0.0" y="460" width="375" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="IncomeStisticsTableViewCell" id="ptn-Ur-cu8" customClass="IncomeStisticsTableViewCell" customModule="FinanceHelper" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ptn-Ur-cu8" id="nSW-1h-hBC">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sum" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y63-O2-wmX">
+                                                    <rect key="frame" x="187.5" y="11" width="172.5" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WOb-Fy-de7">
+                                                    <rect key="frame" x="15" y="11" width="172.5" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Y63-O2-wmX" firstAttribute="leading" secondItem="WOb-Fy-de7" secondAttribute="trailing" id="1I5-vw-Iid"/>
+                                                <constraint firstItem="Y63-O2-wmX" firstAttribute="trailing" secondItem="nSW-1h-hBC" secondAttribute="trailingMargin" id="2P3-Od-n0g"/>
+                                                <constraint firstItem="Y63-O2-wmX" firstAttribute="top" secondItem="nSW-1h-hBC" secondAttribute="topMargin" id="BZm-hL-Z9B"/>
+                                                <constraint firstItem="Y63-O2-wmX" firstAttribute="width" secondItem="WOb-Fy-de7" secondAttribute="width" id="HdP-n4-Blw"/>
+                                                <constraint firstItem="Y63-O2-wmX" firstAttribute="centerY" secondItem="WOb-Fy-de7" secondAttribute="centerY" id="MIL-Kh-phK"/>
+                                                <constraint firstItem="WOb-Fy-de7" firstAttribute="top" secondItem="nSW-1h-hBC" secondAttribute="top" constant="11" id="PDn-DU-ZqQ"/>
+                                                <constraint firstItem="WOb-Fy-de7" firstAttribute="leading" secondItem="nSW-1h-hBC" secondAttribute="leading" constant="15" id="nFr-r5-1Ij"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="dateLbl" destination="WOb-Fy-de7" id="nuD-Pl-zxn"/>
+                                            <outlet property="sumLbl" destination="Y63-O2-wmX" id="lKo-30-Xs6"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="BFx-QW-ROX" firstAttribute="trailing" secondItem="ZT3-qj-edk" secondAttribute="trailing" id="65o-z3-0kE"/>
+                            <constraint firstItem="BFx-QW-ROX" firstAttribute="bottom" secondItem="ZT3-qj-edk" secondAttribute="bottom" id="Adc-S9-IuA"/>
+                            <constraint firstItem="ZT3-qj-edk" firstAttribute="centerX" secondItem="JeJ-jC-xN7" secondAttribute="centerX" id="B0G-4e-hpR"/>
+                            <constraint firstItem="ZT3-qj-edk" firstAttribute="leading" secondItem="BFx-QW-ROX" secondAttribute="leading" id="GOw-70-hIC"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="BFx-QW-ROX"/>
+                    </view>
+                    <connections>
+                        <outlet property="statisticsTableView" destination="ZT3-qj-edk" id="Nro-hL-izU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9JZ-yw-3Jh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4663" y="-291"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="m8t-6Q-8xW">

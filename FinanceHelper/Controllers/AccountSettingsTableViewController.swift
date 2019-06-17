@@ -41,6 +41,12 @@ class AccountSettingsTableViewController: UITableViewController {
     }
     
   
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "IncomeStatisticsViewController"{
+            let nextVC = segue.destination as! IncomeStatisticsViewController
+            nextVC.account = self.navigationItem.title!
+        }
+    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {

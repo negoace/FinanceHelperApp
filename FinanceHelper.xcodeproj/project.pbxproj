@@ -24,7 +24,9 @@
 		A11FADC22278CDDE00D63006 /* ExpenseAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A11FADC12278CDDE00D63006 /* ExpenseAlertView.xib */; };
 		A11FADC42278D65100D63006 /* ExpenseAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11FADC32278D65100D63006 /* ExpenseAlertView.swift */; };
 		A11FADC8227B0AA800D63006 /* LegendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11FADC7227B0AA800D63006 /* LegendTableViewCell.swift */; };
-		A12CFF4B22A84FCF00594999 /* AccountRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12CFF4A22A84FCF00594999 /* AccountRealm.swift */; };
+		A12CFF8B22B76BA400594999 /* IncomeStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12CFF8A22B76BA400594999 /* IncomeStatisticsViewController.swift */; };
+		A12CFF8D22B77CE200594999 /* IncomeStisticsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12CFF8C22B77CE200594999 /* IncomeStisticsTableViewCell.swift */; };
+		A12CFF8F22B77FE400594999 /* IncomeHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12CFF8E22B77FE400594999 /* IncomeHistory.swift */; };
 		A1612B3D2289E2CC00ADE616 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1612B3C2289E2CC00ADE616 /* SettingsTableViewController.swift */; };
 		A19A4E4322A53AB400E4D5F6 /* ExchangeRatesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19A4E4222A53AB400E4D5F6 /* ExchangeRatesTableViewController.swift */; };
 		A19A4E4722A5411B00E4D5F6 /* ExchangeRates.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19A4E4622A5411B00E4D5F6 /* ExchangeRates.swift */; };
@@ -66,7 +68,9 @@
 		A11FADC12278CDDE00D63006 /* ExpenseAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExpenseAlertView.xib; sourceTree = "<group>"; };
 		A11FADC32278D65100D63006 /* ExpenseAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseAlertView.swift; sourceTree = "<group>"; };
 		A11FADC7227B0AA800D63006 /* LegendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegendTableViewCell.swift; sourceTree = "<group>"; };
-		A12CFF4A22A84FCF00594999 /* AccountRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRealm.swift; sourceTree = "<group>"; };
+		A12CFF8A22B76BA400594999 /* IncomeStatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeStatisticsViewController.swift; sourceTree = "<group>"; };
+		A12CFF8C22B77CE200594999 /* IncomeStisticsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeStisticsTableViewCell.swift; sourceTree = "<group>"; };
+		A12CFF8E22B77FE400594999 /* IncomeHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeHistory.swift; sourceTree = "<group>"; };
 		A1612B3C2289E2CC00ADE616 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		A19A4E4222A53AB400E4D5F6 /* ExchangeRatesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesTableViewController.swift; sourceTree = "<group>"; };
 		A19A4E4622A5411B00E4D5F6 /* ExchangeRates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRates.swift; sourceTree = "<group>"; };
@@ -142,6 +146,7 @@
 				A11FAD58226F235E00D63006 /* ViewController.swift */,
 				A11FAD76226F784A00D63006 /* AccountsManagementViewController.swift */,
 				A10E15BE228455C0001D2E72 /* AccountSettingsTableViewController.swift */,
+				A12CFF8A22B76BA400594999 /* IncomeStatisticsViewController.swift */,
 				A1612B3C2289E2CC00ADE616 /* SettingsTableViewController.swift */,
 				A19A4E4222A53AB400E4D5F6 /* ExchangeRatesTableViewController.swift */,
 				A11FAD892270D43300D63006 /* Extensions.swift */,
@@ -155,7 +160,7 @@
 				A11FAD7A226F813700D63006 /* Account.swift */,
 				A10E15BA22844980001D2E72 /* AccountsData.swift */,
 				A19A4E4622A5411B00E4D5F6 /* ExchangeRates.swift */,
-				A12CFF4A22A84FCF00594999 /* AccountRealm.swift */,
+				A12CFF8E22B77FE400594999 /* IncomeHistory.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -175,6 +180,7 @@
 			children = (
 				A11FADC7227B0AA800D63006 /* LegendTableViewCell.swift */,
 				A11FAD78226F79C300D63006 /* AccountManagementTableViewCell.swift */,
+				A12CFF8C22B77CE200594999 /* IncomeStisticsTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -330,16 +336,18 @@
 			files = (
 				A19A4E4722A5411B00E4D5F6 /* ExchangeRates.swift in Sources */,
 				A10E15BF228455C0001D2E72 /* AccountSettingsTableViewController.swift in Sources */,
+				A12CFF8D22B77CE200594999 /* IncomeStisticsTableViewCell.swift in Sources */,
 				A1612B3D2289E2CC00ADE616 /* SettingsTableViewController.swift in Sources */,
 				A11FAD7B226F813700D63006 /* Account.swift in Sources */,
 				A11FAD79226F79C300D63006 /* AccountManagementTableViewCell.swift in Sources */,
 				A11FAD83226F9F0300D63006 /* AlertView.swift in Sources */,
+				A12CFF8F22B77FE400594999 /* IncomeHistory.swift in Sources */,
 				A11FAD8A2270D43300D63006 /* Extensions.swift in Sources */,
 				A11FAD81226F974900D63006 /* Nib.swift in Sources */,
+				A12CFF8B22B76BA400594999 /* IncomeStatisticsViewController.swift in Sources */,
 				A11FAD59226F235E00D63006 /* ViewController.swift in Sources */,
 				A19A4E4322A53AB400E4D5F6 /* ExchangeRatesTableViewController.swift in Sources */,
 				A11FAD57226F235E00D63006 /* AppDelegate.swift in Sources */,
-				A12CFF4B22A84FCF00594999 /* AccountRealm.swift in Sources */,
 				A11FADC42278D65100D63006 /* ExpenseAlertView.swift in Sources */,
 				A11FADC8227B0AA800D63006 /* LegendTableViewCell.swift in Sources */,
 				A11FAD77226F784A00D63006 /* AccountsManagementViewController.swift in Sources */,
