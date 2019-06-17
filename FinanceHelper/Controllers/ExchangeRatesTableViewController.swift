@@ -29,9 +29,13 @@ class ExchangeRatesTableViewController: UITableViewController {
         let imageView = UIImageView(image: image)
         tableView.backgroundView = imageView
         tableView.tableFooterView = UIView()
-//        tableView.isScrollEnabled = false
-//        self.navigationItem.title = "Exchange Rates"
-//        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.78, green:0.78, blue:0.78, alpha:1.0)]
+        tableView.isScrollEnabled = false
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.barTintColor = .clear
+        self.navigationItem.title = "Exchange Rates"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.78, green:0.78, blue:0.78, alpha:1.0)]
         
         
         
@@ -65,7 +69,7 @@ class ExchangeRatesTableViewController: UITableViewController {
     }
     private func getExchageRate(){
     
-        let params: [String:Any] = [:/*"valcode":"EUR", "date":"20190603"*/]
+        let params: [String:Any] = [:]
         
        ExchangeRates.shared.makeRequest(params: params)
     

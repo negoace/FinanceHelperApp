@@ -220,7 +220,11 @@ extension AccountsManagementViewController: UITableViewDelegate, UITableViewData
 
 extension AccountsManagementViewController: AlertDelegate {
     func addBtnPressed(){
-        if alertView.firstLblTF.text != nil && alertView.firstLblTF.text != "" && alertView.secondLblTF.text != nil && alertView.secondLblTF.text != "" && accountsData.accounts.contains(where: { (item) -> Bool in
+        if alertView.firstLblTF.text != nil &&
+            alertView.firstLblTF.text != "" &&
+            alertView.secondLblTF.text != nil &&
+            alertView.secondLblTF.text != "" &&
+            accountsData.accounts.contains(where: { (item) -> Bool in
             if item.title == alertView.firstLblTF.text! {
                 return true
             }

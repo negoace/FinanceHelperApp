@@ -433,8 +433,8 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q4j-JA-yMi">
-                                                    <rect key="frame" x="324" y="7" width="31" height="30"/>
-                                                    <state key="normal" title="USD"/>
+                                                    <rect key="frame" x="323" y="7" width="32" height="30"/>
+                                                    <state key="normal" title="UAH"/>
                                                 </button>
                                             </subviews>
                                             <constraints>

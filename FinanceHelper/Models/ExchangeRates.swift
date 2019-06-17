@@ -38,7 +38,6 @@ class ExchangeRates {
             guard let data = response.data else {return}
 
             guard let json = try? JSON(data: data) else {return}
-            print(json)
             
             guard let arr = json.array else {return}
          
@@ -53,7 +52,7 @@ class ExchangeRates {
             let finalUsdRate = usdRate / Double(usdUnits)
             
             
-            self.usdRate = round(finalUsdRate * 10000)/10000
+            self.usdRate = round(finalUsdRate * 100)/100
             
             guard let eurDict = arr[9].dictionary else {return}
             
@@ -65,7 +64,7 @@ class ExchangeRates {
             
             let finalEurRate = eurRate / Double(eurUnits)
             
-            self.eurRate = round(finalEurRate*10000)/10000
+            self.eurRate = round(finalEurRate*100)/100
         }
         print("end")
     }
