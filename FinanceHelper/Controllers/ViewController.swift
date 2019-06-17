@@ -651,7 +651,9 @@ extension ViewController: ExpenseAlertDelegate {
         expenseAlertView.secondLblTF.placeholder = nil
     }
     
-    private func expenseAlertViewAddBtnAction(){
+    
+    func addBtnTapped(){
+       // expenseAlertViewAddBtnAction()
         if accountsData.accounts.contains(where: { (item) -> Bool in
             if item.title == expenseAlertView.firstLblTF.text!{
                 return true
@@ -670,7 +672,7 @@ extension ViewController: ExpenseAlertDelegate {
             accountsInRealm = realm.objects(Account.self)
             try! realm.write {
                 for item in accountsInRealm{
-                    if item.title == alertView.firstLblTF.text!{
+                    if item.title == expenseAlertView.firstLblTF.text!{
                         item.amountOfMoney -= Float(expenseAlertView.thirdLblTF.text!) ?? 0
                         realm.add(item)
                     }
@@ -681,6 +683,54 @@ extension ViewController: ExpenseAlertDelegate {
                     }
                 }
             }
+            
+            let date = Date()
+            let formatter = DateFormatter()
+            formatter.dateFormat = "dd.MM.yyyy"
+            let resultDate = formatter.string(from: date)
+            let history = ExpenseHistory()
+            history.date = resultDate
+            history.sum = expenseAlertView.thirdLblTF.text!
+            history.expense = expenseAlertView.secondLblTF.text!
+            let historySingleton = ExpenseHistory.shared
+            let expenseStatisticDict =  ExpenseStatisticDict()
+            expenseStatisticDict.key = expenseAlertView.firstLblTF.text!
+            expenseStatisticDict.value.append(history)
+            //            history.historyArray.append(history)
+//            let dict: Results<ExpenseStatisticDict>!
+//            dict = realm.objects(ExpenseStatisticDict.self)
+           
+           
+            
+            let dict: Results<ExpenseStatisticDict>!
+            dict = realm.objects(ExpenseStatisticDict.self)
+            
+            if dict.isEmpty || dict.contains(expenseStatisticDict) == false{
+                try! realm.write {
+                    realm.add(expenseStatisticDict)
+                }
+                
+                
+            } else {
+            try!realm.write {
+                    for item in dict{
+                        if item.key == expenseAlertView.firstLblTF.text!{
+                            item.value.append(history)
+                            realm.add(item)
+                        }
+                    }
+                }
+            }
+            
+            for item in accountsData.accounts{
+                if item.title == expenseAlertView.firstLblTF.text!{
+                    item.accountExpenseHistory.append(history)
+                    historySingleton.historyDict[expenseAlertView.firstLblTF.text!] = item.accountExpenseHistory
+                }
+            }
+            print(historySingleton.historyDict)
+            setSumLbl()
+            
             
             removeExpenseAlertView()
             
@@ -701,10 +751,6 @@ extension ViewController: ExpenseAlertDelegate {
         
         legendTableView.reloadData()
         setSumLbl()
-    }
-    
-    func addBtnTapped(){
-        expenseAlertViewAddBtnAction()
     }
     
     private func expenseAlertViewCancelBtnAction(){

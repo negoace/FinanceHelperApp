@@ -14,6 +14,7 @@ class Account: Object {
    @objc dynamic var currency: String = "USD"
    @objc dynamic var amountOfMoney: Float = 0
     var accountIncomeHistory:[IncomeHistory] = []
+    var accountExpenseHistory:[ExpenseHistory] = []
 //    init (title: String, currency: String){
 //        self.title = title
 //        self.currency = currency

@@ -46,6 +46,11 @@ class AccountSettingsTableViewController: UITableViewController {
             let nextVC = segue.destination as! IncomeStatisticsViewController
             nextVC.account = self.navigationItem.title!
         }
+        
+        if segue.identifier == "ExpenseViewController" {
+            let nextVC = segue.destination as! ExpenseViewController
+            nextVC.account = self.navigationItem.title!
+        }
     }
     // MARK: - Table view data source
 
