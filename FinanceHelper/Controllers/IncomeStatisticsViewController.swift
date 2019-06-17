@@ -12,6 +12,7 @@ class IncomeStatisticsViewController: UIViewController {
 
     @IBOutlet weak var statisticsTableView: UITableView!
     
+    @IBOutlet weak var noDataLbl: UILabel!
     var historyArray: List<IncomeHistory>!
     var historyArray2: [IncomeHistory] = []
     var incomeHistorySingleton = IncomeHistory.shared
@@ -31,10 +32,14 @@ class IncomeStatisticsViewController: UIViewController {
         
         historyArray = dict[account]
         
-        for item in historyArray{
-            historyArray2.append(item)
+        if historyArray != nil{
+            for item in historyArray{
+                historyArray2.append(item)
+            }
+        } else {
+            noDataLbl.isHidden = false
+            noDataLbl.textColor = #colorLiteral(red: 0.7843137255, green: 0.7843137255, blue: 0.7843137255, alpha: 1)
         }
-        
         
     }
     

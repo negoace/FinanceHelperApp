@@ -664,6 +664,15 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NO DATA YET" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ssq-wB-edH">
+                                <rect key="frame" x="20" y="178" width="335" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="7eB-YI-Wxh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -671,10 +680,14 @@
                             <constraint firstItem="BFx-QW-ROX" firstAttribute="bottom" secondItem="ZT3-qj-edk" secondAttribute="bottom" id="Adc-S9-IuA"/>
                             <constraint firstItem="ZT3-qj-edk" firstAttribute="centerX" secondItem="JeJ-jC-xN7" secondAttribute="centerX" id="B0G-4e-hpR"/>
                             <constraint firstItem="ZT3-qj-edk" firstAttribute="leading" secondItem="BFx-QW-ROX" secondAttribute="leading" id="GOw-70-hIC"/>
+                            <constraint firstItem="ssq-wB-edH" firstAttribute="centerX" secondItem="JeJ-jC-xN7" secondAttribute="centerX" id="VCc-wh-Wd8"/>
+                            <constraint firstItem="ssq-wB-edH" firstAttribute="top" secondItem="BFx-QW-ROX" secondAttribute="top" constant="114" id="i9w-ou-rJ0"/>
+                            <constraint firstItem="BFx-QW-ROX" firstAttribute="trailing" secondItem="ssq-wB-edH" secondAttribute="trailing" constant="20" id="usd-3y-EHn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="BFx-QW-ROX"/>
                     </view>
                     <connections>
+                        <outlet property="noDataLbl" destination="ssq-wB-edH" id="BiC-mk-a1X"/>
                         <outlet property="statisticsTableView" destination="ZT3-qj-edk" id="Nro-hL-izU"/>
                     </connections>
                 </viewController>
