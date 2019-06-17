@@ -68,8 +68,11 @@ class AccountsManagementViewController: UIViewController {
     @objc func keyboardWillShow(_ notification: NSNotification){
         guard let userInfo = notification.userInfo else {return}
         let kbFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let viewHeight = self.view.frame.height
+        let topPart = viewHeight - kbFrame.size.height
+        let topPartCenter = topPart/2
         alertView.frame.origin.y = 0
-        alertView.frame.origin.y -= kbFrame.size.height / 3
+        alertView.center.y = topPartCenter
         
     }
     

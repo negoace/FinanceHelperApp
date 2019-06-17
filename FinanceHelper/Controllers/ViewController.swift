@@ -28,8 +28,7 @@ class ViewController: UIViewController {
         expenseAlertView.delegate = self
         return expenseAlertView
     }()
-    
-    let visualEffectView: UIVisualEffectView = {
+    private  let visualEffectView: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: .dark)
         let view = UIVisualEffectView(effect: blurEffect)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -143,19 +142,24 @@ class ViewController: UIViewController {
     @objc func keyboardWillShow(_ notification: NSNotification){
         guard let userInfo = notification.userInfo else {return}
         let kbFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let viewHeight = self.view.frame.height
+        let topPart = viewHeight - kbFrame.size.height
+        let topPartCenter = topPart/2
+        
         guard let alertView = alertView else {
             expenseAlertView.frame.origin.y = 0
-            expenseAlertView.frame.origin.y -= kbFrame.size.height / 3
+            expenseAlertView.center.y = topPartCenter
             return
-            
         }
         alertView.frame.origin.y = 0
         expenseAlertView.frame.origin.y = 0
-        
-        alertView.frame.origin.y -= kbFrame.size.height / 3
-        expenseAlertView.frame.origin.y -= kbFrame.size.height / 3
+
+        //alertView.frame.origin.y -= kbFrame.size.height / 3
+        alertView.center.y = topPartCenter
+       // expenseAlertView.frame.origin.y -= kbFrame.size.height / 3
+        expenseAlertView.center.y = topPartCenter
     }
-    
+
     @objc func keyboardWillHide(_ notification: NSNotification) {
         guard let alertView = alertView else {
             expenseAlertView.frame.origin.y = 0
@@ -219,6 +223,7 @@ class ViewController: UIViewController {
 
     
     func setupExpenseAlert() {
+       
         self.view.addSubview(expenseAlertView)
         expenseAlertView.center = self.view.center
         expenseAlertView.titleLbl.textColor = #colorLiteral(red: 0.7843137255, green: 0.7843137255, blue: 0.7843137255, alpha: 1)
@@ -233,6 +238,7 @@ class ViewController: UIViewController {
     
     
     func setupVisualEffectView(){
+        
         view.addSubview(visualEffectView)
         visualEffectView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         visualEffectView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
