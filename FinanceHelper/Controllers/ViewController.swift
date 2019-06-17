@@ -397,87 +397,8 @@ extension ViewController: AlertDelegate {
         alertView.secondLblTF.placeholder = nil
     }
     
-    private func alertViewAddBtnAction(){
-        if accountsData.accounts.isEmpty &&
-            alertView.firstLblTF.text != nil &&
-            alertView.firstLblTF.text != "" &&
-            alertView.secondLblTF.text != nil &&
-            alertView.secondLblTF.text != ""{
-            let account = Account()
-            account.amountOfMoney = Float(alertView.secondLblTF.text!) ?? 0
-            account.title = alertView.firstLblTF.text!
-            accountsData.accounts.append(account)
-            
-            
-            let date = Date()
-            let formatter = DateFormatter()
-            formatter.dateFormat = "dd.MM.yyyy"
-            let resultDate = formatter.string(from: date)
-            let history = IncomeHistory()
-            history.date = resultDate
-            history.sum = alertView.secondLblTF.text!
-            let historySingleton = IncomeHistory.shared
-            history.historyArray.append(history)
-//            let array = [history]
-            historySingleton.historyDict[alertView.firstLblTF.text!] = history.historyArray
-            print(historySingleton.historyDict)
-            saveAccountInRealm(account: account)
-            removeAlertView()
-            
-          
-            
-        } else if alertView.firstLblTF.text != nil &&
-            alertView.firstLblTF.text != "" &&
-            alertView.secondLblTF.text != nil &&
-            alertView.secondLblTF.text != "" &&
-            accountsData.accounts.contains(where: { (item) -> Bool in
-                if item.title == alertView.firstLblTF.text! {
-                    return true
-                }
-                return false
-            }) == false {
-            let account = Account()
-            account.amountOfMoney = Float(alertView.secondLblTF.text!) ?? 0
-            account.title = alertView.firstLblTF.text!
-            accountsData.accounts.append(account)
-            
-            saveAccountInRealm(account: account)
-            removeAlertView()
-        } else if accountsData.accounts.contains(where: { (item) -> Bool in
-            if item.title == alertView.firstLblTF.text!{
-                return true
-            }
-            return false
-        }) == true  {
-            
-            let realm = try! Realm()
-            var accountsInRealm: Results<Account>!
-            accountsInRealm = realm.objects(Account.self)
-            try! realm.write {
-                for item in accountsInRealm{
-                    if item.title == alertView.firstLblTF.text!{
-                        item.amountOfMoney += Float(alertView.secondLblTF.text!) ?? 0
-                        realm.add(item)
-                    }
-                }
-                for item in accountsData.accounts{
-                    if item.title == alertView.firstLblTF.text!{
-                        item.amountOfMoney += Float(alertView.secondLblTF.text!) ?? 0
-                    }
-                }
-            }
-            removeAlertView()
-        } else {
-            alertView.firstLblTF.placeholder = "Can not be empty"
-            alertView.secondLblTF.placeholder = "Can not be empty"
-        }
-        
-        legendTableView.reloadData()
-        setSumLbl()
-    }
     
     func addBtnPressed() {
-       // alertViewAddBtnAction()
         if accountsData.accounts.isEmpty &&
             alertView.firstLblTF.text != nil &&
             alertView.firstLblTF.text != "" &&
@@ -497,9 +418,7 @@ extension ViewController: AlertDelegate {
             history.date = resultDate
             history.sum = alertView.secondLblTF.text!
             let historySingleton = IncomeHistory.shared
-//            history.historyArray.append(history)
             account.accountIncomeHistory.append(history)
-            //            let array = [history]
             let incomeStatisticDict = IncomeStatisticDict()
             incomeStatisticDict.key = alertView.firstLblTF.text!
             incomeStatisticDict.value.append(history)
@@ -512,8 +431,6 @@ extension ViewController: AlertDelegate {
             saveAccountInRealm(account: account)
             removeAlertView()
             
-            
-            
         } else if alertView.firstLblTF.text != nil &&
             alertView.firstLblTF.text != "" &&
             alertView.secondLblTF.text != nil &&
@@ -536,9 +453,7 @@ extension ViewController: AlertDelegate {
             history.date = resultDate
             history.sum = alertView.secondLblTF.text!
             let historySingleton = IncomeHistory.shared
-//            history.historyArray.append(history)
             account.accountIncomeHistory.append(history)
-            //            let array = [history]
             let incomeStatisticDict = IncomeStatisticDict()
             incomeStatisticDict.key = alertView.firstLblTF.text!
             incomeStatisticDict.value.append(history)
@@ -582,7 +497,6 @@ extension ViewController: AlertDelegate {
             history.date = resultDate
             history.sum = alertView.secondLblTF.text!
             let historySingleton = IncomeHistory.shared
-//            history.historyArray.append(history)
             let dict: Results<IncomeStatisticDict>!
             dict = realm.objects(IncomeStatisticDict.self)
             
@@ -603,9 +517,6 @@ extension ViewController: AlertDelegate {
                     historySingleton.historyDict[alertView.firstLblTF.text!] = item.accountIncomeHistory
                 }
             }
-            
-            
-            //            let array = [history]
             
             print(historySingleton.historyDict)
             removeAlertView()
@@ -653,7 +564,6 @@ extension ViewController: ExpenseAlertDelegate {
     
     
     func addBtnTapped(){
-       // expenseAlertViewAddBtnAction()
         if accountsData.accounts.contains(where: { (item) -> Bool in
             if item.title == expenseAlertView.firstLblTF.text!{
                 return true
@@ -696,12 +606,6 @@ extension ViewController: ExpenseAlertDelegate {
             let expenseStatisticDict =  ExpenseStatisticDict()
             expenseStatisticDict.key = expenseAlertView.firstLblTF.text!
             expenseStatisticDict.value.append(history)
-            //            history.historyArray.append(history)
-//            let dict: Results<ExpenseStatisticDict>!
-//            dict = realm.objects(ExpenseStatisticDict.self)
-           
-           
-            
             let dict: Results<ExpenseStatisticDict>!
             dict = realm.objects(ExpenseStatisticDict.self)
             

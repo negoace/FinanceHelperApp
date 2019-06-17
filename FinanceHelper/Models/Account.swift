@@ -11,27 +11,10 @@ import RealmSwift
 
 class Account: Object {
    @objc dynamic var title: String = ""
-   @objc dynamic var currency: String = "USD"
+   @objc dynamic var currency: String = "UAH"
    @objc dynamic var amountOfMoney: Float = 0
     var accountIncomeHistory:[IncomeHistory] = []
     var accountExpenseHistory:[ExpenseHistory] = []
-//    init (title: String, currency: String){
-//        self.title = title
-//        self.currency = currency
-//    }
-//
-//    init (title: String, currency: String, amountOfMoney: Float){
-//        self.title = title
-//        self.currency = currency
-//        self.amountOfMoney = amountOfMoney
-//    }
-//
-//    init (title: String) {
-//        self.title = title
-//    }
-//
-//    init() { }
-//
     
 }
 
